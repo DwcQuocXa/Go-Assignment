@@ -1,0 +1,14 @@
+GET http://localhost:8080/persons
+
+
+###
+GET http://localhost:8080/persons/cf89ca58-4fd6-4378-a1c2-c40b17f8527e
+
+###
+POST http://localhost:8080/persons
+Content-Type: application/json
+
+{
+    "firstName": "Joe",
+    "lastName": "Doe"
+}
