@@ -2,7 +2,7 @@ GET http://localhost:8080/persons
 
 
 ###
-GET http://localhost:8080/persons/cf89ca58-4fd6-4378-a1c2-c40b17f8527e
+GET http://localhost:8080/persons/573595e2-19e8-4b67-8b69-c5c9d3ab15e2
 
 ###
 POST http://localhost:8080/persons
@@ -11,4 +11,16 @@ Content-Type: application/json
 {
     "firstName": "Joe",
     "lastName": "Doe"
+}
+
+###
+DELETE http://localhost:8080/persons/a26ca1e7-b729-4e42-99bd-4ce7532c07a9
+
+###
+PUT http://localhost:8080/persons/f7a17922-19d2-4a9c-8c1a-4375280d244f
+Content-Type: application/json
+
+{
+    "firstName": "Duc",
+    "lastName": "Ngo"
 }

@@ -51,13 +51,15 @@ func createPerson(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	var newPerson Person
 
-	newPerson.PersonalCode = uuid.NewV4()
-	personList = append(personList, newPerson)
-
 	if err := json.NewDecoder(r.Body).Decode(&newPerson); err != nil {
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
+
+	newPerson.PersonalCode = uuid.NewV4()
+	personList = append(personList, newPerson)
+
+	json.NewEncoder(w).Encode(newPerson)
 }
 
 func updatePerson(w http.ResponseWriter, r *http.Request) {
@@ -70,13 +72,15 @@ func updatePerson(w http.ResponseWriter, r *http.Request) {
 			personList = append(personList[:index], personList[index+1:]...)
 			var person Person
 
-			person.PersonalCode = codeParams
-			personList = append(personList, person)
-
 			if err := json.NewDecoder(r.Body).Decode(&person); err != nil {
 				http.Error(w, err.Error(), http.StatusBadRequest)
 				return
 			}
+
+			person.PersonalCode = codeParams
+			personList = append(personList, person)
+
+			json.NewEncoder(w).Encode(person)
 		}
 	}
 }
@@ -92,6 +96,12 @@ func deletePerson(w http.ResponseWriter, r *http.Request) {
 			break
 		}
 	}
+
+	if err := json.NewEncoder(w).Encode(personList); err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
 }
 
 func main() {
@@ -108,8 +118,8 @@ func main() {
 	r.HandleFunc("/persons", getPersons).Methods("GET")
 	r.HandleFunc("/persons/{personal-code}", getPerson).Methods("GET")
 	r.HandleFunc("/persons", createPerson).Methods("POST")
-	r.HandleFunc("/persons/{personal-code}", updatePerson).Methods("GET")
-	r.HandleFunc("/persons/{personal-code}", deletePerson).Methods("GET")
+	r.HandleFunc("/persons/{personal-code}", updatePerson).Methods("PUT")
+	r.HandleFunc("/persons/{personal-code}", deletePerson).Methods("DELETE")
 
 	//Server and port
 	log.Fatal(http.ListenAndServe(":8080", r))
