@@ -1,23 +1,23 @@
-GET http://localhost:8080/persons
+GET http://localhost:8000/api/persons
 
 
 ###
-GET http://localhost:8080/persons/573595e2-19e8-4b67-8b69-c5c9d3ab15e2
+GET http://localhost:8000/api/persons/b16060b5-c11b-46b2-92be-ca75fa9820fc
 
 ###
-POST http://localhost:8080/persons
+POST http://localhost:8000/api/persons
 Content-Type: application/json
 
 {
-    "firstName": "Joe",
-    "lastName": "Doe"
+    "firstName": "Duc1",
+    "lastName": "Ngo1"
 }
 
 ###
-DELETE http://localhost:8080/persons/a26ca1e7-b729-4e42-99bd-4ce7532c07a9
+DELETE http://localhost:8000/api/persons/45175584-bfcc-48ec-b973-b2e2e90ab0261
 
 ###
-PUT http://localhost:8080/persons/f7a17922-19d2-4a9c-8c1a-4375280d244f
+PUT http://localhost:8000/api/persons/ba39d1ce-a7be-430e-b701-a0674ab7cc6e1
 Content-Type: application/json
 
 {
